@@ -1,24 +1,24 @@
-# 基于 ChatGLM 的本地知识库知识问答系统——LawGLM
+# Local Knowledge Base Question-Answering System based on ChatGLM - LcGLM.
 
-## 原始数据说明
+## Original Data Description
 
-数据集的构造上，我们参考ChineseNlpCorpus 公开中文自然语言处理语料数据库，选择来其中来源于百度知道的和法律相关的3.6 万条法律问答数据；此外，我们参考了开源的Lawyer LLaMA数据集，增加法考数据和法律指令微调数据。因为数据大小原因，点击[链接](https://pan.baidu.com/s/1WiDe5tLdR3IpKT63Ark9Qw )获取数据，提取码为 3lph 。
+In terms of dataset construction, we referred to the ChineseNlpCorpus, a publicly available Chinese natural language processing corpus database. We selected 36,000 legal question-answer data sourced from Baidu Zhidao (Baidu Knows). Furthermore, we also consulted the open-source Lawyer LLaMA dataset and included data from the legal examination and legal instruction fine-tuning. Due to the size of the data, please click [here](https://pan.baidu.com/s/1WiDe5tLdR3IpKT63Ark9Qw) to obtain the data with the extraction code "3lph".
 
-## 代码文件说明
+## Code File Description
 
-`clean_data.ipynb`为对数据集进行清洗、合并的python实现；
-`data`文件存放处理完毕、可用于模型微调的数据集及其相关信息；
-`src`文件存放模型微调的相关代码；
-`output`文件存放模型训练时保存的参数信息、日志文件、损失函数图像等；
-`eval_result`存放模型评估时保存的评估指标与日志文件；
-`pre_result`存放模型预测时保存的预测指标、预测结果与日志文件；
-`requirements.txt`为该项目所依赖的第三方库及其版本号。
+- `clean_data.ipynb`: Python implementation for data cleaning and merging.
+- `data`: Folder containing processed datasets and related information that can be used for model fine-tuning.
+- `src`: Folder containing relevant code for model fine-tuning.
+- `output`: Folder containing saved parameter information, log files, loss function graphs, etc. during model training.
+- `eval_result`: Folder containing evaluation metrics and log files saved during model evaluation.
+- `pre_result`: Folder containing prediction metrics, prediction results, and log files saved during model prediction.
+- `requirements.txt`: File listing the third-party libraries and their versions on which this project depends.
 
-## 运行说明
+## Running Instructions
 
-为方便运行，我们将整体运行命令明确列出如下：
+To facilitate running the project, we have explicitly listed the overall command as follows:
 
-### 环境搭建
+### Environment Setup
 
 ```bash
 git lfs install
@@ -29,15 +29,15 @@ cd ChatGLM-Efficient-Tuning
 pip install -r requirements.txt
 ```
 
-#### 下载ChatGLM2-6B模型
+#### Download the ChatGLM2-6B model
 
-从huggingface上下载链接，版本[chatglm2-6b](https://huggingface.co/THUDM/chatglm2-6b/tree/main) v1.0（截至2023/8/19最新版本）
+To download the model from Hugging Face, you can use the following link: [chatglm2-6b](https://huggingface.co/THUDM/chatglm2-6b/tree/main) v1.0 (latest version as of August 19, 2023).
 
 ```bash
 git clone https://huggingface.co/THUDM/chatglm2-6b
 ```
 
-### 单 GPU 微调训练（以lora为例）
+### Fine-tuning on a Single GPU (eg: Lora)
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -58,7 +58,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --fp16
 ```
 
-### 指标评估（BLEU分数和汉语ROUGE分数）
+### Evaluation Metrics (BLEU & ROUGE Score)
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -74,7 +74,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --predict_with_generate
 ```
 
-### 模型预测
+### Model Prediction
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -90,7 +90,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --predict_with_generate
 ```
 
-### 浏览器测试
+### Browser Testing
 
 ```bash
 python src/web_demo.py \
@@ -99,7 +99,6 @@ python src/web_demo.py \
     --checkpoint_dir /root/autodl-tmp/ChatGLM-Efficient-Tuning/output/lora/checkpoint-4000
 ```
 
-## 其他
+## Other
 
-如有问题，请联系yixu.im@gmail.com
-
+If you have any questions, please contact [yixu.im@gmail.com](mailto:yixu.im@gmail.com).
