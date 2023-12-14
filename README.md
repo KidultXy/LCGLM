@@ -1,4 +1,4 @@
-# Local Knowledge Base Question-Answering System based on ChatGLM - LcGLM.
+# Local Knowledge Base Question-Answering System based on ChatGLM - LcGLM(LawGLM).
 
 ## Original Data Description
 
